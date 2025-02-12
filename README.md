@@ -22,9 +22,28 @@ Once RabbitMQ is running, you can access the management interface at:
 - **Username:** guest  
 - **Password:** guest  
 
+### Execute the micro services
+
+run
+
+```sh 
+node server.js 
+``` 
+under /user-service
+
+same run
+
+```sh 
+node server.js 
+``` 
+under /order-service
+
+
 ### API Endpoints
 
-- [http://localhost:5001/api/users](http://localhost:5001/api/users) - Retrieves the list of users from the User Service.
-- [http://localhost:5002/api/orders/john@example.com](http://localhost:5002/api/orders/john@example.com) - Fetches order details for the user from the Order Service.
-- [http://localhost:5001/api/users/john@example.com](http://localhost:5001/api/users/john@example.com) - Retrieves user details along with their respective order. The User Service communicates with the Order Service through RabbitMQ to fetch the order details for the respective user.
+http://localhost:5001/api/users - Retrieves the list of users from the User Service.
+
+http://localhost:5002/api/orders/john@example.com - Fetches order details for the user from the Order Service.
+
+http://localhost:5001/api/users/john@example.com - Retrieves user details along with their respective order. The User Service communicates with the Order Service through RabbitMQ to fetch the order details for the respective user.
 
