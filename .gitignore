@@ -1,2 +1,4 @@
 order-service/node_modules/
 user-service/node_modules/
+order-service/.env
+user-service/.env
