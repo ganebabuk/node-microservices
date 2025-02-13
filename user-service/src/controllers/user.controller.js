@@ -1,8 +1,16 @@
 const User = require("../models/user.model");
 const jwt = require("jsonwebtoken");
 const { consumeUserRequests } = require("../../rabbitmq/consumeUserRequests");
+const { consumeRenewedTokens } = require("../kafka/tokenConsumer");
 
 const JWT_SECRET = process.env.JWT_SECRET;
+
+// Start Kafka consumer in a separate module
+async function startTokenListener() {
+  await consumeRenewedTokens();
+}
+
+startTokenListener();
 
 // Get all users
 exports.getUsers = async (req, res) => {

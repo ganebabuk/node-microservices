@@ -22,6 +22,14 @@ Once RabbitMQ is running, you can access the management interface at:
 - **Username:** guest  
 - **Password:** guest  
 
+### Kafka installation using docker for token auto renewal
+
+install docker and run the command
+```sh
+docker-compose up -d --build
+```
+under your root folder
+
 ### Execute the micro services
 
 run
@@ -46,4 +54,5 @@ http://localhost:5001/api/users - Retrieves the list of users from the User Serv
 http://localhost:5002/api/orders/john@example.com - Fetches order details for the user from the Order Service.
 
 http://localhost:5001/api/users/john@example.com - Retrieves user details along with their respective order. The User Service communicates with the Order Service through RabbitMQ to fetch the order details for the respective user.
+
 

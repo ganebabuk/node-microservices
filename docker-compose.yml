@@ -1,0 +1,62 @@
+# services:
+#   zookeeper:
+#     image: bitnami/zookeeper:latest
+#     container_name: zookeeper
+#     environment:
+#       - ALLOW_ANONYMOUS_LOGIN=yes
+#     ports:
+#       - "2181:2181"
+
+#   kafka:
+#     image: bitnami/kafka:latest
+#     container_name: kafka
+#     environment:
+#       - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+#       - ALLOW_PLAINTEXT_LISTENER=yes
+#       - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+#     depends_on:
+#       - zookeeper
+#     ports:
+#       - "9092:9092"  # Exposing Kafka to the host
+
+services:
+  zookeeper:
+    image: bitnami/zookeeper:latest
+    container_name: zookeeper
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: bitnami/kafka:latest
+    container_name: kafka
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+
+  user-service:
+    build: ./user-service
+    container_name: user-service
+    environment:
+      - KAFKA_BROKER=kafka:9092
+    depends_on:
+      - kafka
+    ports:
+      - "5001:5001"
+
+  order-service:
+    build: ./order-service
+    container_name: order-service
+    environment:
+      - KAFKA_BROKER=kafka:9092
+    depends_on:
+      - kafka
+    ports:
+      - "5002:5002"
+
