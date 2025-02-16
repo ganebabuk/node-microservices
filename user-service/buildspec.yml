@@ -1,0 +1,16 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - echo Logging into Amazon ECR...
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 080274970346.dkr.ecr.us-east-1.amazonaws.com
+  build:
+    commands:
+      - echo Building Order Service Docker image...
+      - docker build -t order-service ./user-service
+      - docker tag order-service:latest 080274970346.dkr.ecr.us-east-1.amazonaws.com/order-service:latest
+  post_build:
+    commands:
+      - echo Pushing Docker image...
+      - docker push 080274970346.dkr.ecr.us-east-1.amazonaws.com/order-service:latest
+      - echo Build completed!
