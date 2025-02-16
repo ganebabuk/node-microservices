@@ -3,6 +3,7 @@ version: 0.2
 phases:
   pre_build:
     commands:
+      - cd user-service  # Change directory before building
       - echo Logging into Amazon ECR...
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 080274970346.dkr.ecr.us-east-1.amazonaws.com
 
