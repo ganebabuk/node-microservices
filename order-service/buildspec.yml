@@ -9,9 +9,8 @@ phases:
   build:
     commands:
       - echo Building Docker image...
-      - ls -la  # List files to verify correct context
-      - docker build -t order-service ./order-service  # Explicit path
-      - docker tag order-service:latest 080274970346.dkr.ecr.us-east-1.amazonaws.com/user-service:latest
+      - docker build -t order-service .
+      - docker tag order-service:latest 080274970346.dkr.ecr.us-east-1.amazonaws.com/order-service:latest
 
   post_build:
     commands:
