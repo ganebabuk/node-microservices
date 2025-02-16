@@ -10,7 +10,8 @@ phases:
   build:
     commands:
       - echo Building Docker image...
-      - docker build -t order-service ./order-service
+      - ls -la
+      - docker build -t order-service ./node-microservices/order-service
       - docker tag order-service:latest 080274970346.dkr.ecr.us-east-1.amazonaws.com/order-service:latest
 
   post_build:
