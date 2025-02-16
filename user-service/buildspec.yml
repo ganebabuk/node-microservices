@@ -10,9 +10,9 @@ phases:
   build:
     commands:
       - echo Building Docker image...
-      - ls -la
-      - docker build -t user-service ./node-microservices/user-service
-      - docker tag order-service:latest 080274970346.dkr.ecr.us-east-1.amazonaws.com/user-service:latest
+      - ls -la  # List files to verify correct context
+      - docker build -t user-service .
+      - docker tag user-service:latest 080274970346.dkr.ecr.us-east-1.amazonaws.com/user-service:latest
 
   post_build:
     commands:
